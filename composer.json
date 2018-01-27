@@ -1,0 +1,26 @@
+{
+    "name": "powerjson/powerjson",
+    "description": "json with great powers",
+    "type": "library",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.2",
+        "phpunit/phpunit": "^6.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Kowalski",
+            "email": "jonathan.kowalski@laposte.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PowerJson\\":"src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "nategood/commando": "*"
+    },
+    "bin":["src/powerjson"]
+}
