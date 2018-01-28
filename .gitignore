@@ -1,3 +1,5 @@
 work/
 vendor/
 composer.lock
+.idea/
+index.php
