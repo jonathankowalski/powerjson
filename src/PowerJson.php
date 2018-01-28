@@ -50,7 +50,7 @@ class PowerJson
         return $this;
     }
 
-    public function assign(string $name, string $value)
+    public function assign(string $name, string $value) : PowerJson
     {
         $this->variables[$name] = $value;
         return $this;
@@ -63,7 +63,7 @@ class PowerJson
         return $this;
     }
 
-    protected function explore()
+    protected function explore() : void
     {
         if (!$this->fileList) {
             foreach ($this->dirList as $dir) {
@@ -92,7 +92,7 @@ class PowerJson
         return $this;
     }
 
-    protected function createContentAndReplace($clue, $data, $replace)
+    protected function createContentAndReplace(string $clue, string $data, string $replace) : void
     {
         $newContent = $this->createContent($clue, $data);
         if (!!$newContent) {
@@ -122,7 +122,7 @@ class PowerJson
         }
     }
 
-    protected function replaceVariables()
+    protected function replaceVariables() : void
     {
         foreach ($this->variables as $name => $value) {
             $this->content = str_replace(self::PREFIX_VAR . $name, $value, $this->content);
@@ -138,7 +138,7 @@ class PowerJson
         return $this->encodedContent;
     }
 
-    public function output(string $filename = null)
+    public function output(string $filename = null) : string
     {
         $pretty = ($this->config['pretty'] ?? false) ? JSON_PRETTY_PRINT : 0;
         $json = json_encode($this->decode(), $pretty);
