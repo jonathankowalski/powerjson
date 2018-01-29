@@ -16,7 +16,7 @@ class PowerJson
     const PREFIX_VAR = '$';
     const JSON_EXT = '.json';
 
-    const LOCAL_CONFIG_FN = 'powerjson.config.json';
+    const LOCAL_CONFIG_FN = '.powerjson.config.json';
 
     public function __construct(array $config = [])
     {
