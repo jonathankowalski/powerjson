@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jonathankowalski
- * Date: 26/01/2018
- * Time: 10:45
- */
 
 namespace PowerJson;
 

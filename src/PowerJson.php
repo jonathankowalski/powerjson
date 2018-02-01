@@ -37,7 +37,10 @@ class PowerJson
     public function context(string $dir) : PowerJson
     {
         if (!in_array($dir, $this->dirList)) {
-            $this->dirList[] = $dir;
+            if (!file_exists($dir)) {
+                throw new \InvalidArgumentException($dir . ' must be a valid entry');
+            }
+            $this->dirList[] = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
         return $this;
     }
