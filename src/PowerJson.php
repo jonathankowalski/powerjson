@@ -4,7 +4,7 @@ namespace PowerJson;
 
 class PowerJson
 {
-    protected $config;
+    protected $options = [];
     protected $dirList = [];
     protected $variables = [];
     protected $content = '';
@@ -16,22 +16,9 @@ class PowerJson
     const PREFIX_VAR = '$';
     const JSON_EXT = '.json';
 
-    const LOCAL_CONFIG_FN = '.powerjson.config.json';
-
-    public function __construct(array $config = [])
+    public function __construct(array $options = [])
     {
-        $this->config = $config;
-    }
-
-    protected function localconfig() : array
-    {
-        if (file_exists(self::LOCAL_CONFIG_FN)) {
-            $config = json_decode(file_get_contents(self::LOCAL_CONFIG_FN), true);
-            if (!$config) {
-                throw new \InvalidArgumentException('config is not a valid json file');
-            }
-            $this->config = $config;
-        }
+        $this->options = $options;
     }
 
     public function context(string $dir) : PowerJson
@@ -106,7 +93,7 @@ class PowerJson
     protected function createContent(string $filename, string $dataString) : string
     {
         if (isset($this->fileList[$filename])) {
-            $pj = new PowerJson($this->config);
+            $pj = new PowerJson($this->options);
             $pj->contexts($this->dirList);
             if (!!$dataString) {
                 $this->parseAndReplace($dataString, $pj);
@@ -143,7 +130,7 @@ class PowerJson
 
     public function output(string $filename = null) : string
     {
-        $pretty = ($this->config['pretty'] ?? false) ? JSON_PRETTY_PRINT : 0;
+        $pretty = ($this->options['pretty'] ?? false) ? JSON_PRETTY_PRINT : 0;
         $json = json_encode($this->decode(), $pretty);
         if (!!$filename) {
             return file_put_contents($filename, $json);

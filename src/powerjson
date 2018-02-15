@@ -8,5 +8,9 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
     include_once __DIR__ . '/../vendor/autoload.php';
 }
 
-$runner = new \PowerJson\Runner(__DIR__, new \Commando\Command());
+$runner = new \PowerJson\Runner();
+$baseConfiguration = getcwd() . DIRECTORY_SEPARATOR . \PowerJson\Runner::LOCAL_CONFIG_FN;
+if (!file_exists($baseConfiguration)) {
+    $runner->setCommand(new \Commando\Command);
+}
 echo $runner->run() . PHP_EOL;
